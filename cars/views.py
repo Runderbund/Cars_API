@@ -1,8 +1,7 @@
-from django.db import models
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
-# Create your models here.
-class Car(models.Model):
-    make = models.CharField(max_length=255)
-    model = models.CharField(max_length=255)
-    year = models.IntegerField()
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+@api_view(['GET'])
+def cars_list(request):
+    
+    return Response('ok')
