@@ -22,7 +22,6 @@ def cars_list(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def car_detail(request, pk):
     car = get_object_or_404(Car, pk=pk)
-
     if request.method == 'GET':
         serializer = CarSerializer(car)
         return Response(serializer.data)
@@ -34,3 +33,12 @@ def car_detail(request, pk):
     elif request.method == 'DELETE':
         car.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+def cars_by_make(request, make):
+    cars_make = Car.objects.filter(make=make) #Calling filter on objects instead of first making objects.all()
+    if cars_make:
+        serializer = CarSerializer(cars_make, many=True)
+        return Response(serializer.data)
+    else:
+        return Response("No cars of that make exist in the database.",status=status.HTTP_404_NOT_FOUND)
