@@ -1,5 +1,5 @@
 from django.db import models
-from dealerships import Dealership
+from dealerships.models import Dealership
 
 # Create your models here.
 class Car(models.Model):
